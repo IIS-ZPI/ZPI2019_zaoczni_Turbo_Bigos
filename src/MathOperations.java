@@ -28,3 +28,4 @@ public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithm
 		return (double)(a/b);
 	}
 } 
+// Zad_6 Daniel
