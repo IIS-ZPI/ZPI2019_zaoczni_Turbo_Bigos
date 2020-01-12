@@ -29,3 +29,5 @@ public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithm
 	}
 } 
 // Zad_6 Daniel
+//komentarz seba zad 6
+
