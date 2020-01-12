@@ -1,7 +1,5 @@
+public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithmeticsDiff {
 
-public class MathOperations implements IArithmeticsDiff {
-	
-	
 	public boolean difference(double a, double b)
 	{
 		if(a != b)
@@ -12,6 +10,16 @@ public class MathOperations implements IArithmeticsDiff {
 		{
 			return false;
 		}
+   }
+   
+	public double addition(double a, double b)
+	{
+		return a+b;
+  }
+  
+	public double division(double a, double b)
+	{
+		return (double)(a/b);
 	}
 
 }
