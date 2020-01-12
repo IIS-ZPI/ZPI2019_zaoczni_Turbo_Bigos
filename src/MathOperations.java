@@ -9,3 +9,4 @@ public class MathOperations implements IArithmeticsDiv {
 
 }
 // wszystko wydaje sie byc OK
+//komentarz seba zad 6
