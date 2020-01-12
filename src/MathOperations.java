@@ -28,3 +28,4 @@ public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithm
 		return (double)(a/b);
 	}
 } 
+//komentarz seba zad 6
