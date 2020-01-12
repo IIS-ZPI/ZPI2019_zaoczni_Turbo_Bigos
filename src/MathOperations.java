@@ -23,3 +23,4 @@ public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithm
 	}
 
 }
+// wszystko wydaje sie byc OK
