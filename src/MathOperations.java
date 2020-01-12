@@ -5,7 +5,6 @@ public class MathOperations implements IArithmeticsAdd, IArithmeticsDiv, IArithm
 		return a*b;
 	}
 
-	//komentarz dawid
 	public boolean diffrence (double a, double b)
 	{
 		if (a != b)
