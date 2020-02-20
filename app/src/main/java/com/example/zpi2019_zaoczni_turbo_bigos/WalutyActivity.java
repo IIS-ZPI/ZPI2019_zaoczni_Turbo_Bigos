@@ -154,8 +154,8 @@ public class WalutyActivity extends Fragment {
 //-----------------------------------------------------------------------------------
 
         TextView w = rootView.findViewById(R.id.wynik);
-        w.setText(Float.toString(wynik));
-
+        //w.setText(Float.toString(wynik));
+        w.setText(war+" "+selectedWalutaZ+" jest równe "+wynik+" "+selectedWalutaDO);
 
     }
 
