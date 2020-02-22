@@ -49,31 +49,7 @@ public class StatisticsActivity extends Fragment {
     float dominanta;
     float mediana;
 
-    public static String getData(final String url) {
-        final CountDownLatch latch = new CountDownLatch(1);
-        final String[] outputString = {null};
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                String responseString = null;
-                PobieranieDanych pobieranieDanych = new PobieranieDanych();
-                try {
-                    responseString = pobieranieDanych.Pobieranie(url);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                outputString[0] = responseString;
-                latch.countDown();
-            }
-        });
-        thread.start();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return outputString[0];
-    }
+
 
     @Nullable
     @Override
@@ -166,7 +142,7 @@ public class StatisticsActivity extends Fragment {
 
         String dateFrom=zbior.dateFormat.format(calendar.getTime());
         url=("https://api.nbp.pl/api/exchangerates/rates/c/"+currency+"/"+dateFrom+"/"+dateToday+"/?format=json");
-        Waluta data = new Gson().fromJson(getData(url), Waluta.class);
+        Waluta data = new Gson().fromJson(PobieranieDanych.getData(url), Waluta.class);
 //-----------------------------------------------------------------------------------
         List<Float> lista = new ArrayList<>();
 

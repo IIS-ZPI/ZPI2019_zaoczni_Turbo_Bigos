@@ -48,31 +48,7 @@ public class WalutyActivity extends Fragment {
 
     View rootView;
 
-    public static String getData(final String url) {
-        final CountDownLatch latch = new CountDownLatch(1);
-        final String[] outputString = {null};
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String responseString = null;
-                PobieranieDanych pobieranieDanych = new PobieranieDanych();
-                try {
-                    responseString = pobieranieDanych.Pobieranie(url);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                outputString[0] = responseString;
-                latch.countDown();
-            }
-        });
-        thread.start();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return outputString[0];
-    }
+
 
 
     @Nullable
@@ -133,8 +109,8 @@ public class WalutyActivity extends Fragment {
         urlZ=("https://api.nbp.pl/api/exchangerates/rates/c/"+currencyZ+"/"+dateToday+"/"+dateToday+"/?format=json");
         urlDO=("https://api.nbp.pl/api/exchangerates/rates/c/"+currencyDO+"/"+dateToday+"/"+dateToday+"/?format=json");
 
-        Waluta dataZ = new Gson().fromJson(getData(urlZ), Waluta.class);
-        Waluta dataDO = new Gson().fromJson(getData(urlDO), Waluta.class);
+        Waluta dataZ = new Gson().fromJson(PobieranieDanych.getData(urlZ), Waluta.class);
+        Waluta dataDO = new Gson().fromJson(PobieranieDanych.getData(urlDO), Waluta.class);
 //-----------------------------------------------------------------------------------
 
         float z = 0;
