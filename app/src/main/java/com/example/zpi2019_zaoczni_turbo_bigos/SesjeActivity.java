@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
+
 
 import com.google.gson.Gson;
 
@@ -145,14 +145,14 @@ public class SesjeActivity extends Fragment {
 
         String dateFrom=zbior.dateFormat.format(calendar.getTime());
         url=("https://api.nbp.pl/api/exchangerates/rates/c/"+currency+"/"+dateFrom+"/"+dateToday+"/?format=json");
-        Waluta data = new Gson().fromJson(PobieranieDanych.getData(url), Waluta.class);
+        Waluta data = new Gson().fromJson(PobieranieDanych.Pobieranie(url), Waluta.class);
 
         malejace = 0;
         stale = 0;
         wzrostowe = 0;
         List<Float> lista = new ArrayList<>();
 
-        for (KursWaluty waluty : data.getRates()) {
+        for (Kurs waluty : data.getRates()) {
             System.out.println(waluty.getAsk() + " + ");
             lista.add(waluty.getAsk());
             if (lista.size() > 1) {

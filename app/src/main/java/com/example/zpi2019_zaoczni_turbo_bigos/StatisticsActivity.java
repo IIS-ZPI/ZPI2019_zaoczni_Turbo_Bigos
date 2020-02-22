@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
+
 
 public class StatisticsActivity extends Fragment {
 
@@ -142,7 +142,7 @@ public class StatisticsActivity extends Fragment {
 
         String dateFrom=zbior.dateFormat.format(calendar.getTime());
         url=("https://api.nbp.pl/api/exchangerates/rates/c/"+currency+"/"+dateFrom+"/"+dateToday+"/?format=json");
-        Waluta data = new Gson().fromJson(PobieranieDanych.getData(url), Waluta.class);
+        Waluta data = new Gson().fromJson(PobieranieDanych.Pobieranie(url), Waluta.class);
 //-----------------------------------------------------------------------------------
         List<Float> lista = new ArrayList<>();
 
@@ -152,7 +152,7 @@ public class StatisticsActivity extends Fragment {
         float srednia ;
 
 
-        for (KursWaluty waluty : data.getRates()) {
+        for (Kurs waluty : data.getRates()) {
             lista.add(waluty.getAsk());
             suma = suma + waluty.getAsk();
         }

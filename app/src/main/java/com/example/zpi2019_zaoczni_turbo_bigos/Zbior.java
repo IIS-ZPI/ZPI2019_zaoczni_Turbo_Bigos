@@ -28,9 +28,9 @@ class Waluta {
     private String table;
     private String currency;
     private String code;
-    private ArrayList<KursWaluty> rates = new ArrayList<>();
+    private ArrayList<Kurs> rates = new ArrayList<>();
 
-    public ArrayList<KursWaluty> getRates() {
+    public ArrayList<Kurs> getRates() {
         return rates;
     }
 }
@@ -38,7 +38,7 @@ class Waluta {
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class KursWaluty {
+class Kurs {
     private String no;
     private String effectiveDate;
     private float ask;
@@ -55,17 +55,12 @@ class KursWaluty {
 
 class PobieranieDanych {
 
-    private final OkHttpClient httpClient = new OkHttpClient();
-
-    public String Pobieranie(String url) throws Exception {
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
+    public String Laczenie(String url) throws Exception {
+        OkHttpClient ohc = new OkHttpClient();
+        Request zapytanie = new Request.Builder().url(url).build();
         Response response = null;
         try {
-            response = httpClient.newCall(request).execute();
+            response = ohc.newCall(zapytanie).execute();
             return response.body().string();
         } finally {
             if (response != null) {
@@ -75,29 +70,29 @@ class PobieranieDanych {
 
     }
 
-    public static String getData(final String url) {
-        final CountDownLatch latch = new CountDownLatch(1);
-        final String[] outputString = {null};
+    public static String Pobieranie(final String url) {
+        final CountDownLatch cdl = new CountDownLatch(1);
+        final String[] dane = {null};
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 String responseString = null;
-                PobieranieDanych pobieranieDanych = new PobieranieDanych();
                 try {
-                    responseString = pobieranieDanych.Pobieranie(url);
+                    PobieranieDanych pd = new PobieranieDanych();
+                    responseString = pd.Laczenie(url);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                outputString[0] = responseString;
-                latch.countDown();
+                dane[0] = responseString;
+                cdl.countDown();
             }
         });
         thread.start();
         try {
-            latch.await();
+            cdl.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return outputString[0];
+        return dane[0];
     }
 }

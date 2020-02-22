@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
+
 
 public class WalutyActivity extends Fragment {
 
@@ -109,28 +109,30 @@ public class WalutyActivity extends Fragment {
         urlZ=("https://api.nbp.pl/api/exchangerates/rates/c/"+currencyZ+"/"+dateToday+"/"+dateToday+"/?format=json");
         urlDO=("https://api.nbp.pl/api/exchangerates/rates/c/"+currencyDO+"/"+dateToday+"/"+dateToday+"/?format=json");
 
-        Waluta dataZ = new Gson().fromJson(PobieranieDanych.getData(urlZ), Waluta.class);
-        Waluta dataDO = new Gson().fromJson(PobieranieDanych.getData(urlDO), Waluta.class);
+
+        Waluta dataZ = new Gson().fromJson(PobieranieDanych.Pobieranie(urlZ), Waluta.class);
+        Waluta dataDO = new Gson().fromJson(PobieranieDanych.Pobieranie(urlDO), Waluta.class);
+
+
 //-----------------------------------------------------------------------------------
 
         float z = 0;
-        for (KursWaluty waluty : dataZ.getRates()) {
+        for (Kurs waluty : dataZ.getRates()) {
             z = waluty.getAsk();
         }
 
         float d = 0;
-        for (KursWaluty waluty : dataDO.getRates()) {
+        for (Kurs waluty : dataDO.getRates()) {
             d = waluty.getAsk();
         }
 
         String war = String.valueOf(ilosc_waluty.getText());
 
-       wynik = z * Float.parseFloat(war) /d;
+        wynik = z * Float.parseFloat(war) /d;
 
 //-----------------------------------------------------------------------------------
 
         TextView w = rootView.findViewById(R.id.wynik);
-        //w.setText(Float.toString(wynik));
         w.setText(war+" "+selectedWalutaZ+" jest równe "+wynik+" "+selectedWalutaDO);
 
     }
